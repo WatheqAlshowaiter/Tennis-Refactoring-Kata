@@ -33,8 +33,7 @@ class TennisGame7 implements TennisGame
     {
         $result = 'Current score: ';
 
-        if ($this->player1Score === $this->player2Score) {
-            // tie score
+        if ($this->isTieScore()) {
             $result .= match ($this->player1Score) {
                 0 => 'Love-All',
                 1 => 'Fifteen-All',
@@ -70,5 +69,13 @@ class TennisGame7 implements TennisGame
         }
 
         return $result . ', enjoy your game!';
+    }
+
+    /**
+     * @return bool
+     */
+    private function isTieScore(): bool
+    {
+        return $this->player1Score === $this->player2Score;
     }
 }
