@@ -6,18 +6,12 @@ namespace TennisGame;
 
 class TennisGame6 implements TennisGame
 {
-    private $player1Name;
-
-    private $player2Name;
-
-    private $player1Score = 0;
-
-    private $player2Score = 0;
-
-    public function __construct($player1Name, $player2Name)
-    {
-        $this->player1Name = $player1Name;
-        $this->player2Name = $player2Name;
+    public function __construct(
+        private $player1Name,
+        private $player2Name,
+        private $player1Score = 0,
+        private $player2Score = 0,
+    ) {
     }
 
     public function wonPoint($playerName): void
@@ -44,13 +38,13 @@ class TennisGame6 implements TennisGame
         } elseif ($this->player1Score >= 4 || $this->player2Score >= 4) {
             // end-game score
             if ($this->player1Score - $this->player2Score === 1) {
-                $result = 'Advantage ' . $this->player1Name;
+                $result = 'Advantage '.$this->player1Name;
             } elseif ($this->player1Score - $this->player2Score === -1) {
-                $result = 'Advantage ' . $this->player2Name;
+                $result = 'Advantage '.$this->player2Name;
             } elseif ($this->player1Score - $this->player2Score >= 2) {
-                $result = 'Win for ' . $this->player1Name;
+                $result = 'Win for '.$this->player1Name;
             } else {
-                $result = 'Win for ' . $this->player2Name;
+                $result = 'Win for '.$this->player2Name;
             }
         } else {
             // regular score
@@ -66,7 +60,7 @@ class TennisGame6 implements TennisGame
                 2 => 'Thirty',
                 default => 'Forty',
             };
-            $result = $score1 . '-' . $score2;
+            $result = $score1.'-'.$score2;
         }
 
         return $result;

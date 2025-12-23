@@ -6,13 +6,11 @@ namespace TennisGame;
 
 class TennisGame1 implements TennisGame
 {
-    private int $m_score1 = 0;
-
-    private int $m_score2 = 0;
-
     public function __construct(
         private string $player1Name,
-        private string $player2Name
+        private string $player2Name,
+        private int $m_score1 = 0,
+        private int $m_score2 = 0,
     ) {
     }
 
