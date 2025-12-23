@@ -1,14 +1,8 @@
-.DS_Store
-*.swp
+/.idea
+/.phpstorm.meta.php
+/vendor
+/.phpunit.result.cache
+/build/
 
-# Eclipse files
-.project
-.settings/
-
-# IntelliJ files
-*.iml
-.idea/
-
-# VS
-.vs/
-.vscode/
+composer.lock
+composer.phar
