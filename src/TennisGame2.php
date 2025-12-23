@@ -116,9 +116,9 @@ class TennisGame2 implements TennisGame
         return $score;
     }
 
-    public function wonPoint(string $player): void
+    public function wonPoint(string $playerName): void
     {
-        if ($player === 'player1') {
+        if ($playerName === 'player1') {
             $this->P1Score();
         } else {
             $this->P2Score();
