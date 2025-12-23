@@ -45,20 +45,7 @@ class TennisGame6 implements TennisGame
                 $result = 'Win for '.$this->player2Name;
             }
         } else {
-            // regular score
-            $score1 = match ($this->player1Score) {
-                0 => 'Love',
-                1 => 'Fifteen',
-                2 => 'Thirty',
-                default => 'Forty',
-            };
-            $score2 = match ($this->player2Score) {
-                0 => 'Love',
-                1 => 'Fifteen',
-                2 => 'Thirty',
-                default => 'Forty',
-            };
-            $result = $score1.'-'.$score2;
+            $result = $this->regularScore();
         }
 
         return $result;
@@ -78,5 +65,25 @@ class TennisGame6 implements TennisGame
     private function endGameScore(): bool
     {
         return $this->player1Score >= 4 || $this->player2Score >= 4;
+    }
+
+    /**
+     * @return string
+     */
+    private function regularScore(): string
+    {
+        $score1 = match ($this->player1Score) {
+            0 => 'Love',
+            1 => 'Fifteen',
+            2 => 'Thirty',
+            default => 'Forty',
+        };
+        $score2 = match ($this->player2Score) {
+            0 => 'Love',
+            1 => 'Fifteen',
+            2 => 'Thirty',
+            default => 'Forty',
+        };
+        return $score1.'-'.$score2;
     }
 }
