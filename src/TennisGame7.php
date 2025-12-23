@@ -34,32 +34,33 @@ class TennisGame7 implements TennisGame
                 2 => 'Thirty-All',
                 default => 'Deuce',
             };
-        } elseif ($this->player1Score >= 4 || $this->player2Score >= 4) {
-            // end-game score
-            if ($this->player1Score - $this->player2Score === 1) {
-                $result .= 'Advantage '.$this->player1Name;
-            } elseif ($this->player1Score - $this->player2Score === -1) {
-                $result .= 'Advantage '.$this->player2Name;
-            } elseif ($this->player1Score - $this->player2Score >= 2) {
-                $result .= 'Win for '.$this->player1Name;
-            } else {
-                $result .= 'Win for '.$this->player2Name;
-            }
         } else {
-            // regular score
-            $result .= match ($this->player1Score) {
-                0 => 'Love',
-                1 => 'Fifteen',
-                2 => 'Thirty',
-                default => 'Forty',
-            };
-            $result .= '-';
-            $result .= match ($this->player2Score) {
-                0 => 'Love',
-                1 => 'Fifteen',
-                2 => 'Thirty',
-                default => 'Forty',
-            };
+            if ($this->isRegularScore()) {
+                $result .= match ($this->player1Score) {
+                    0 => 'Love',
+                    1 => 'Fifteen',
+                    2 => 'Thirty',
+                    default => 'Forty',
+                };
+                $result .= '-';
+                $result .= match ($this->player2Score) {
+                    0 => 'Love',
+                    1 => 'Fifteen',
+                    2 => 'Thirty',
+                    default => 'Forty',
+                };
+            } else {
+                // end-game score
+                if ($this->player1Score - $this->player2Score === 1) {
+                    $result .= 'Advantage '.$this->player1Name;
+                } elseif ($this->player1Score - $this->player2Score === -1) {
+                    $result .= 'Advantage '.$this->player2Name;
+                } elseif ($this->player1Score - $this->player2Score >= 2) {
+                    $result .= 'Win for '.$this->player1Name;
+                } else {
+                    $result .= 'Win for '.$this->player2Name;
+                }
+            }
         }
 
         return $result.', enjoy your game!';
@@ -71,5 +72,13 @@ class TennisGame7 implements TennisGame
     private function isTieScore(): bool
     {
         return $this->player1Score === $this->player2Score;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isRegularScore(): bool
+    {
+        return $this->player1Score < 4 && $this->player2Score < 4;
     }
 }
