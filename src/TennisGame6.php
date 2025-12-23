@@ -27,16 +27,14 @@ class TennisGame6 implements TennisGame
     {
         $result = '';
 
-        if ($this->player1Score === $this->player2Score) {
-            // tie score
+        if ($this->isTieScore()) {
             $result = match ($this->player1Score) {
                 0 => 'Love-All',
                 1 => 'Fifteen-All',
                 2 => 'Thirty-All',
                 default => 'Deuce',
             };
-        } elseif ($this->player1Score >= 4 || $this->player2Score >= 4) {
-            // end-game score
+        } elseif ($this->endGameScore()) {
             if ($this->player1Score - $this->player2Score === 1) {
                 $result = 'Advantage '.$this->player1Name;
             } elseif ($this->player1Score - $this->player2Score === -1) {
@@ -64,5 +62,21 @@ class TennisGame6 implements TennisGame
         }
 
         return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isTieScore(): bool
+    {
+        return $this->player1Score === $this->player2Score;
+    }
+
+    /**
+     * @return bool
+     */
+    private function endGameScore(): bool
+    {
+        return $this->player1Score >= 4 || $this->player2Score >= 4;
     }
 }
