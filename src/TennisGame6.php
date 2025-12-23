@@ -35,20 +35,12 @@ class TennisGame6 implements TennisGame
 
         if ($this->player1Score === $this->player2Score) {
             // tie score
-            switch ($this->player1Score) {
-                case 0:
-                    $result = 'Love-All';
-                    break;
-                case 1:
-                    $result = 'Fifteen-All';
-                    break;
-                case 2:
-                    $result = 'Thirty-All';
-                    break;
-                default:
-                    $result = 'Deuce';
-                    break;
-            }
+            $result = match ($this->player1Score) {
+                0 => 'Love-All',
+                1 => 'Fifteen-All',
+                2 => 'Thirty-All',
+                default => 'Deuce',
+            };
         } elseif ($this->player1Score >= 4 || $this->player2Score >= 4) {
             // end-game score
             if ($this->player1Score - $this->player2Score === 1) {
@@ -62,34 +54,18 @@ class TennisGame6 implements TennisGame
             }
         } else {
             // regular score
-            switch ($this->player1Score) {
-                case 0:
-                    $score1 = 'Love';
-                    break;
-                case 1:
-                    $score1 = 'Fifteen';
-                    break;
-                case 2:
-                    $score1 = 'Thirty';
-                    break;
-                default:
-                    $score1 = 'Forty';
-                    break;
-            }
-            switch ($this->player2Score) {
-                case 0:
-                    $score2 = 'Love';
-                    break;
-                case 1:
-                    $score2 = 'Fifteen';
-                    break;
-                case 2:
-                    $score2 = 'Thirty';
-                    break;
-                default:
-                    $score2 = 'Forty';
-                    break;
-            }
+            $score1 = match ($this->player1Score) {
+                0 => 'Love',
+                1 => 'Fifteen',
+                2 => 'Thirty',
+                default => 'Forty',
+            };
+            $score2 = match ($this->player2Score) {
+                0 => 'Love',
+                1 => 'Fifteen',
+                2 => 'Thirty',
+                default => 'Forty',
+            };
             $result = $score1 . '-' . $score2;
         }
 
