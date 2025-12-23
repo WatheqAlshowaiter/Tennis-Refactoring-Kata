@@ -50,16 +50,7 @@ class TennisGame7 implements TennisGame
                     default => 'Forty',
                 };
             } else {
-                // end-game score
-                if ($this->player1Score - $this->player2Score === 1) {
-                    $result .= 'Advantage '.$this->player1Name;
-                } elseif ($this->player1Score - $this->player2Score === -1) {
-                    $result .= 'Advantage '.$this->player2Name;
-                } elseif ($this->player1Score - $this->player2Score >= 2) {
-                    $result .= 'Win for '.$this->player1Name;
-                } else {
-                    $result .= 'Win for '.$this->player2Name;
-                }
+                $result = $this->endGameScore($result);
             }
         }
 
@@ -80,5 +71,24 @@ class TennisGame7 implements TennisGame
     private function isRegularScore(): bool
     {
         return $this->player1Score < 4 && $this->player2Score < 4;
+    }
+
+    /**
+     * @param  string  $result
+     *
+     * @return string
+     */
+    private function endGameScore(string $result): string
+    {
+        if ($this->player1Score - $this->player2Score === 1) {
+            $result .= 'Advantage '.$this->player1Name;
+        } elseif ($this->player1Score - $this->player2Score === -1) {
+            $result .= 'Advantage '.$this->player2Name;
+        } elseif ($this->player1Score - $this->player2Score >= 2) {
+            $result .= 'Win for '.$this->player1Name;
+        } else {
+            $result .= 'Win for '.$this->player2Name;
+        }
+        return $result;
     }
 }
